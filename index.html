@@ -13,15 +13,28 @@
 </head>
 <body>
     <div class="container">
+        <div class="date">
+            <div>
+                <span id="day">FRI</span>
+            </div>
+            <div>
+                <span id="date">00</span>
+                <span>-</span>
+                <span id="month">00</span>
+                <span>-</span>
+                <span id="year">00</span>
+            </div>
+        </div>
         <div class="clock">
-            <span id="hrs">00</span>
+            <span id="hrs" class="text">00</span>
             <span>:</span>
-            <span id="min">00</span>
+            <span id="min" class="text">00</span>
             <span>:</span>
-            <span id="sec">00</span>
+            <span id="sec" class="text">00</span>
             <span id="noon">AM</span>
         </div>
     </div>
+
     <script>
         const dateCont = document.querySelector(".date");
         const hrs = document.querySelector("#hrs");
@@ -30,14 +43,35 @@
         const noon = document.querySelector("#noon");
 
         const timeCont = document.querySelector(".clock");
+        const day = document.querySelector("#day");
+        const date = document.querySelector("#date");
+        const month = document.querySelector("#month");
+        const year = document.querySelector("#year");
+
+        days = {
+            1: "MON", 
+            2: "TUE",
+            3: "WED",
+            4: "THU",
+            5: "FRI",
+            6: "SAT",
+            0: "SUN"
+        }
 
         setInterval(() => {
-            let currentTime = new Date(new Date().toLocaleString("en-US", {timeZone: "IST"}));
+            let currentTime = new Date();
+            // let currentTime = new Date(new Date().toLocaleString("en-US", {timeZone: "-1130"}));
             
-            hrs.textContent = (parseInt(currentTime.getHours()) < 10 ? "0" : "") + currentTime.getHours();
-            min.textContent = (parseInt(currentTime.getMinutes()) < 10 ? "0" : "") + currentTime.getMinutes();
-            sec.textContent = (parseInt(currentTime.getSeconds()) < 10 ? "0" : "") + currentTime.getSeconds();
-            noon.textContent = parseInt(currentTime.getHours()) < 12 ? "AM" : "PM";
+            hrs.textContent = ((currentTime.getHours() % 12 < 10) && (currentTime.getHours() % 12 != 0) ? "0" : "") + 
+                String((currentTime.getHours() % 12) === 0 ? 12 : currentTime.getHours() % 12);
+            min.textContent = (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
+            sec.textContent = (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
+            noon.textContent = currentTime.getHours() < 12 ? "AM" : "PM";
+            
+            day.textContent = days[currentTime.getDay()];
+            date.textContent = currentTime.getDate();
+            month.textContent = currentTime.getMonth() + 1;
+            year.textContent = currentTime.getFullYear();
 
         }, 1000);
 
