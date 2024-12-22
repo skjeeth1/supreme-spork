@@ -1,5 +1,5 @@
 * {
-    font-family: "Roboto", sans-serif;  
+    font-family: "Orbitron", serif;  
     font-size: 50px
     ;
 }
@@ -40,4 +40,10 @@ body{
     display: flex;
     justify-content: space-around;
     gap: 50px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    color: black;
+    box-sizing: border-box;
+    box-shadow: 0px 10px 10px rgb(0, 102, 181);
 }
